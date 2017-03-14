@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectTypeGuids>{786C830F-07A1-408B-BD7F-6EE04809D6DB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <ProjectGuid>{A92D52FD-24D1-4379-B472-405B96BB122F}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>Patternizer</RootNamespace>
+    <AssemblyName>Patternizer</AssemblyName>
+    <TargetFrameworkProfile>Profile78</TargetFrameworkProfile>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug</OutputPath>
+    <DefineConstants>DEBUG;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>full</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="LineParser.cs" />
+    <Compile Include="PatternResult.cs" />
+    <Compile Include="StepPattern.cs" />
+    <Compile Include="PatternEvaluator.cs" />
+    <Compile Include="PatternBase.cs" />
+    <Compile Include="PatternEvaluationResult.cs" />
+    <Compile Include="RepeatStep.cs" />
+    <Compile Include="EndsOnRightSideStep.cs" />
+    <Compile Include="MovesDownStep.cs" />
+    <Compile Include="MovesUpStep.cs" />
+    <Compile Include="MovesLeftStep.cs" />
+    <Compile Include="StepPatternEvaluationResult.cs" />
+    <Compile Include="Step.cs" />
+    <Compile Include="PatternEvaluationReasons.cs" />
+    <Compile Include="Pattern.cs" />
+    <Compile Include="MovesRightStep.cs" />
+    <Compile Include="MovesRightAndDownStep.cs" />
+    <Compile Include="MovesLeftAndDownStep.cs" />
+    <Compile Include="Settings.cs" />
+    <Compile Include="StepContext.cs" />
+    <Compile Include="Path.cs" />
+    <Compile Include="RelativePosition.cs" />
+    <Compile Include="MovesRightAndUpStep.cs" />
+    <Compile Include="Point.cs" />
+    <Compile Include="Line.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
+  <ItemGroup>
+    <ProjectReference Include="..\LineRecognizer\LineRecognizer.csproj">
+      <Project>{F2E0C3CD-FBAC-48C4-BD50-4AF957B35734}</Project>
+      <Name>LineRecognizer</Name>
+    </ProjectReference>
+  </ItemGroup>
+</Project>
