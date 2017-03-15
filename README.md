@@ -1,7 +1,7 @@
 # Patternizer
 A great little library for resolving patterns in a list of lines using a fluid-api.
 
-##Status
+## Status
 
 Still in alpha. The basic concept is covered but it needs work.
 
