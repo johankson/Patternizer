@@ -56,6 +56,7 @@
     <Compile Include="MovesRightAndUpStep.cs" />
     <Compile Include="Point.cs" />
     <Compile Include="Line.cs" />
+    <Compile Include="LineRecognizer.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <ItemGroup>
