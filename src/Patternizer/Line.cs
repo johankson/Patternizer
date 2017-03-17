@@ -2,14 +2,10 @@
 
 namespace Patternizer
 {
-	public class Line
+	public struct Line
 	{
 		public Point P1 { get; set; }
 		public Point P2 { get; set; }
-
-		public Line()
-		{
-		}
 
 		public Line(Point p1, Point p2)
 		{
