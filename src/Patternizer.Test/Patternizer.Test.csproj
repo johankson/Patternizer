@@ -6,7 +6,7 @@
     <ProjectTypeGuids>{786C830F-07A1-408B-BD7F-6EE04809D6DB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <ProjectGuid>{9F3CD94B-81B3-4911-B8DB-52CBF19BCF8D}</ProjectGuid>
     <OutputType>Library</OutputType>
-    <RootNamespace>PatternRecognizer.Test</RootNamespace>
+    <RootNamespace>Patternizer.Test</RootNamespace>
     <AssemblyName>PatternRecognizer.Test</AssemblyName>
     <TargetFrameworkProfile>Profile78</TargetFrameworkProfile>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
@@ -35,13 +35,14 @@
     <Compile Include="PathsForTesting.cs" />
     <Compile Include="PathParseTest.cs" />
     <Compile Include="BoxEvaluationTest.cs" />
+    <Compile Include="BasicLineTest.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="nunit.framework">
-      <HintPath>..\packages\NUnit.3.6.1\lib\portable-net45+win8+wp8+wpa81\nunit.framework.dll</HintPath>
-    </Reference>
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\portable-net45+wp80+win8+wpa81\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="nunit.framework">
+      <HintPath>..\packages\NUnit.2.6.4\lib\nunit.framework.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
