@@ -6,7 +6,7 @@
     <ProjectTypeGuids>{FEACFBD2-3405-455C-9665-78FE426C6842};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <ProjectGuid>{79429AB2-7CF0-4AC2-BF00-D811EE0812BE}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>sketchatype.iOS</RootNamespace>
+    <RootNamespace>Sampleapp.iOS</RootNamespace>
     <IPhoneResourcePrefix>Resources</IPhoneResourcePrefix>
     <AssemblyName>sketchatypeiOS</AssemblyName>
   </PropertyGroup>
