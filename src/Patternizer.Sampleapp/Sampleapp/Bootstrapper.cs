@@ -9,7 +9,6 @@ namespace Sampleapp
 		public static void Initialize(ContainerBuilder builder)
 		{
 
-
 		}
 	}
 }

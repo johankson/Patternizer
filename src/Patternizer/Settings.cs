@@ -51,5 +51,19 @@ namespace Patternizer
 		/// </remarks>
 		/// <value>The wide cutoff value.</value>
 		public static float TallCutoffValue { get; set; } = 2f;
+
+		/// <summary>
+		/// The number of times the list of lines should be simplified when
+		/// evaluating patterns.
+		/// </summary>
+		/// <value>The line simplification pass count.</value>
+		public static int LineSimplificationPassCount { get; set; } = 3;
+
+		/// <summary>
+		/// The amount to increase the cut off value for each 
+		/// line simplification step.
+		/// </summary>
+		/// <value>The line simplification step value.</value>
+		public static float LineSimplificationStepValue { get; set; } = 20f;
 	}
 }

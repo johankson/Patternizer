@@ -48,15 +48,11 @@ namespace Sampleapp
             _patternEvaluator.Add("image").When(Pattern.Cross);
 			_patternEvaluator.Add("text").When(p => p.Repetitive(ip => ip.MovesRight().MovesLeftAndDown()).MovesRight());
 			_patternEvaluator.Add("entry").When(p => p.MovesDown().MovesRight().MovesUp().Bounds(BoundsDescriptor.IsWide));
-
 			_patternEvaluator.Add("lineoftext").When(p => p.MovesRight());
-
 			_patternEvaluator.Add("delete").When(p => p.MovesRightAndUp());
-
-		
 		}
 
-		protected async override void AddedToScene ()
+		protected override void AddedToScene ()
 		{
 			base.AddedToScene();
 
@@ -121,7 +117,6 @@ namespace Sampleapp
 				if (_trackedShape != null)
 				{
 					_trackedShape.Position += touch.Delta;
-
 				}
 				else
 				{
@@ -171,7 +166,6 @@ namespace Sampleapp
 				}
 
 				_trackedShape.SetNewPoints(_trackedShape.P1 + p1, _trackedShape.P2 + p2);
-
 			}
 			else
 			{
@@ -181,7 +175,7 @@ namespace Sampleapp
 			}
 		}
 
-		async void OnTouchesEnded(List<CCTouch> touches, CCEvent touchEvent)
+		private void OnTouchesEnded(List<CCTouch> touches, CCEvent touchEvent)
 		{
 			touches = FindUniqueTouches(touches);
 
@@ -243,7 +237,7 @@ namespace Sampleapp
 		/// When that times out and no shape can be determined, then 
 		/// we clear the buffer.
 		/// </remarks>
-		void EvaluateLines(List<Line> lines)
+		private void EvaluateLines(List<Line> lines)
 		{
 			_clearTTL = _clearTTLResetValue;
 			_buffer.AddRange(lines);
@@ -350,7 +344,7 @@ namespace Sampleapp
 			return null;
 		}
 
-		List<ShapeNode> IsShapeOverOtherShapes(Shape shape)
+		private List<ShapeNode> IsShapeOverOtherShapes(Shape shape)
 		{
 			if (_shapeNode.ChildrenCount == 0)
 			{
@@ -369,7 +363,7 @@ namespace Sampleapp
 			return result;
 		}
 
-		static List<CCTouch> FindUniqueTouches (List<CCTouch> touches)
+		private static List<CCTouch> FindUniqueTouches (List<CCTouch> touches)
 		{
 			var list = new List<CCTouch>();
 			foreach (var touch in touches)

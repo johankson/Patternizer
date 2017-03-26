@@ -158,7 +158,7 @@ namespace Patternizer.Test
 		{
 			// Arrange
 			var evaluator = new PatternEvaluator();
-			var path = Path.Parse("10,300 -> 10,270 -> 300,270 -> 300,300");
+			var path = Path.Parse("10,300 -> 10,270 -> 600,270 -> 600,300");
 
 			// Act
 			evaluator.Add("entry").When(p => p.MovesDown().MovesRight().MovesUp().Bounds(BoundsDescriptor.IsWide));

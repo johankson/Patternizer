@@ -23,42 +23,62 @@ namespace Patternizer
 
 		public PatternEvaluationResult Evaluate(List<Line> lines)
 		{
-#if DEBUG
-
 			Debug.WriteLine("EVALUATION START");
-			foreach(var line in lines)
+
+			var pass = 1;
+			while (pass <= Settings.LineSimplificationPassCount)
 			{
-				Debug.WriteLine($"Line {(int)line.P1.X}, {(int)line.P1.Y} -> {(int)line.P2.X}, {(int)line.P2.Y}");
-			}
+				Debug.WriteLine($"Pass {pass}");
+				foreach (var line in lines)
+				{
+					Debug.WriteLine($"Line {(int)line.P1.X}, {(int)line.P1.Y} -> {(int)line.P2.X}, {(int)line.P2.Y}");
+				}
 
-#endif
+				var context = new StepContext();
 
-            var context = new StepContext();
+				foreach (var item in _patterns)
+				{
+					var linesToEvaluate = lines.ToList();
+					var pattern = item.Value;
 
-			foreach (var item in _patterns) {
-				var linesToEvaluate = lines.ToList ();
-				var pattern = item.Value;
-
-				var result = pattern.Evaluate (linesToEvaluate, context);
-				if (result.IsValid && linesToEvaluate.Count == 0) {
-					return new PatternEvaluationResult () { 
-						IsValid = true, 
-						Reason = PatternEvaluationReasons.PatternMatch,
-						Pattern = item.Value,
-						Key = item.Key,
-						UpperLeft = new Point() 
+					var result = pattern.Evaluate(linesToEvaluate, context);
+					if (result.IsValid && linesToEvaluate.Count == 0)
+					{
+						return new PatternEvaluationResult()
 						{
-							X = Math.Min(lines.Min(e=>e.P1.X), lines.Min(e=>e.P2.X)),
-							Y = Math.Min(lines.Min(e=>e.P1.Y), lines.Min(e=>e.P2.Y))
-						},
-						LowerRight = new Point()
-						{	
-							X = Math.Max(lines.Max(e=>e.P1.X), lines.Max(e=>e.P2.X)),
-							Y = Math.Max(lines.Max(e=>e.P1.Y), lines.Max(e=>e.P2.Y))
-						}
+							IsValid = true,
+							Reason = PatternEvaluationReasons.PatternMatch,
+							Pattern = item.Value,
+							Key = item.Key,
+							UpperLeft = new Point()
+							{
+								X = Math.Min(lines.Min(e => e.P1.X), lines.Min(e => e.P2.X)),
+								Y = Math.Min(lines.Min(e => e.P1.Y), lines.Min(e => e.P2.Y))
+							},
+							LowerRight = new Point()
+							{
+								X = Math.Max(lines.Max(e => e.P1.X), lines.Max(e => e.P2.X)),
+								Y = Math.Max(lines.Max(e => e.P1.Y), lines.Max(e => e.P2.Y))
+							}
 
-					};
-				} 
+						};
+					}
+				}
+
+				if (pass <= Settings.LineSimplificationPassCount)
+				{
+					// Simplify lines by removing short lines
+					foreach (var line in lines.ToList())
+					{
+						if (line.Length < (pass * Settings.LineSimplificationStepValue))
+						{
+							Debug.WriteLine($"Removing line {line}");
+							lines.Remove(line);
+						}
+					}
+				}
+
+				pass++;
 			}
 
 			return new PatternEvaluationResult () 

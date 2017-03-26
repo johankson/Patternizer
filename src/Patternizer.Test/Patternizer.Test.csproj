@@ -36,6 +36,7 @@
     <Compile Include="PathParseTest.cs" />
     <Compile Include="BoxEvaluationTest.cs" />
     <Compile Include="BasicLineTest.cs" />
+    <Compile Include="LineSimplifierTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Newtonsoft.Json">
