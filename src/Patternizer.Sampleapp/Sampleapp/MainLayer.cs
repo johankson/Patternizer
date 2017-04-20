@@ -346,11 +346,6 @@ namespace Sampleapp
 
 		private List<ShapeNode> IsShapeOverOtherShapes(Shape shape)
 		{
-			if (_shapeNode.ChildrenCount == 0)
-			{
-				return null;
-			}
-
 			var result = new List<ShapeNode>();
 
 			foreach (var item in _shapeNode.Children.OfType<ShapeNode>())
