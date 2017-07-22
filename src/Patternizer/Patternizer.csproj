@@ -67,10 +67,4 @@
     <Compile Include="LineRecognizer.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
-  <ItemGroup>
-    <ProjectReference Include="..\LineRecognizer\LineRecognizer.csproj">
-      <Project>{F2E0C3CD-FBAC-48C4-BD50-4AF957B35734}</Project>
-      <Name>LineRecognizer</Name>
-    </ProjectReference>
-  </ItemGroup>
 </Project>
