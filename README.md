@@ -69,7 +69,7 @@ evaluator.Add("button").When(Pattern.WideRectangle);
 evaluator.Add("cirle").When(Pattern.Circle);
 
 // pass in a list of lines and get a result
-var lines = new List<Point>() = MagicFunctionThatReturnsLines();
+var lines = new List<Line>() = MagicFunctionThatReturnsLines();
 var result = evaluator.Evaluate(lines);
 var isButton = result.IsValid() && result.Key == "button";
 
