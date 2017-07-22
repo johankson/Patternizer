@@ -6,7 +6,7 @@
 
   <PropertyGroup>
     <PackageId>patternizer</PackageId>
-    <PackageVersion>1.0.0</PackageVersion>
+    <PackageVersion>0.1.0-pre1</PackageVersion>
     <Authors>johankson</Authors>
     <Description>A pattern recognition library using a fluent api</Description>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>

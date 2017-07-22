@@ -1,5 +1,8 @@
 # Patternizer
+
 A little library for resolving patterns in a list of lines using a fluid-api.
+
+![build status](https://io2gamelabs.visualstudio.com/_apis/public/build/definitions/d4e88719-08cf-42ab-bb30-bfc3b76a15ca/6/badge)
 
 ## Why
 
@@ -20,6 +23,10 @@ The library also can define repeating parts. But it's still in alpha and there w
 ## Sample app
 
 The sample app is a Xamarin Forms app that allows you to draw different shapes and it resolves it on the fly.
+
+## Nuget
+
+https://www.nuget.org/packages/patternizer
 
 ## Status
 
