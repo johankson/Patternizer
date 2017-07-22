@@ -4,4 +4,18 @@
     <TargetFramework>netstandard1.0</TargetFramework>
   </PropertyGroup>
 
+  <PropertyGroup>
+    <PackageId>patternizer</PackageId>
+    <PackageVersion>1.0.0</PackageVersion>
+    <Authors>johankson</Authors>
+    <Description>A pattern recognition library using a fluent api</Description>
+    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+    <PackageReleaseNotes></PackageReleaseNotes>
+    <Copyright>Copyright 2017 - Johan Karlsson</Copyright>
+    <PackageTags>pattern recognition</PackageTags>
+    <!--<PackageIconUrl>http://i.imgur.com/p0xJYYC.png</PackageIconUrl>-->
+    <PackageProjectUrl>https://github.com/johankson/Patternizer</PackageProjectUrl>
+    <PackageLicenseUrl>https://opensource.org/licenses/MIT</PackageLicenseUrl>
+  </PropertyGroup>
+  
 </Project>
