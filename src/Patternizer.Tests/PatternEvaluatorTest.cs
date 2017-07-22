@@ -1,17 +1,15 @@
 using System;
 using System.Threading.Tasks;
 using System.Linq;
-using NUnit.Framework;
 using System.Collections.Generic;
 using Patternizer;
+using Xunit;
 
 namespace Patternizer.Test
 {
-	[TestFixture]
 	public class PatternEvaluatorTest
 	{
-
-		[Test]
+		[Fact]
 		public void WideRectanglePatternTest()
 		{
 			// Arrange
@@ -22,11 +20,11 @@ namespace Patternizer.Test
 			var result = evaluator.Evaluate(PathsForTesting.WideRectangle1);
 
 			// Assert
-			Assert.IsTrue(result.IsValid);
-			Assert.AreEqual("button", result.Key);
+			Assert.True(result.IsValid);
+			Assert.Equal("button", result.Key);
 		}
 
-		[Test]
+		[Fact]
 		public void WideRectanglePatternFailTest2()
 		{
 			// Arrange
@@ -37,10 +35,10 @@ namespace Patternizer.Test
 			var result = evaluator.Evaluate(PathsForTesting.TallRectangle);
 
 			// Assert
-			Assert.IsFalse(result.IsValid);
+			Assert.False(result.IsValid);
 		}
 
-		[Test]
+		[Fact]
 		public void ImagePatternTest()
 		{
 			// Arrange
@@ -53,11 +51,11 @@ namespace Patternizer.Test
 			var result = evaluator.Evaluate(PathsForTesting.ImageRectangle);
 
 			// Assert
-			Assert.IsTrue(result.IsValid);
-			Assert.AreSame("image", result.Key);
+			Assert.True(result.IsValid);
+			Assert.Same("image", result.Key);
 		}
 
-		[Test]
+		[Fact]
 		public void WideRectanglePatternFailTest()
 		{
 			// Arrange
@@ -68,11 +66,11 @@ namespace Patternizer.Test
 			var result = evaluator.Evaluate(PathsForTesting.ImageRectangle);
 
 			// Assert
-			Assert.IsFalse(result.IsValid);
-			Assert.IsNull(result.Key);
+			Assert.False(result.IsValid);
+			Assert.Null(result.Key);
 		}
 
-		[Test]
+		[Fact]
 		public void ImagePatternFailTest()
 		{
 			// Arrange
@@ -85,10 +83,10 @@ namespace Patternizer.Test
 			var results = evaluator.Evaluate(PathsForTesting.WideRectangle1);
 
 			// Assert
-			Assert.IsFalse(results.IsValid);
+			Assert.False(results.IsValid);
 		}
 
-		[Test]
+		[Fact]
 		public void ImagePatternWithMultipleRegisteredTest()
 		{
 			// Arrange
@@ -103,11 +101,11 @@ namespace Patternizer.Test
 			var result = evaluator.Evaluate(PathsForTesting.ImageRectangle);
 
 			// Assert
-			Assert.IsTrue(result.IsValid);
-			Assert.AreSame("image", result.Key);
+			Assert.True(result.IsValid);
+			Assert.Same("image", result.Key);
 		}
 
-		[Test]
+		[Fact]
 		public void WideRectangleBoundsTest()
 		{
 			// Arrange
@@ -118,12 +116,12 @@ namespace Patternizer.Test
 			var result = evaluator.Evaluate(PathsForTesting.WideRectangle1);
 
 			// Assert
-			Assert.IsTrue(result.IsValid);
-			Assert.AreEqual("button", result.Key);
-			Assert.AreEqual(PathsForTesting.WideRectangle1.Min(e => e.P1.X), result.UpperLeft.X);
+			Assert.True(result.IsValid);
+			Assert.Equal("button", result.Key);
+			Assert.Equal(PathsForTesting.WideRectangle1.Min(e => e.P1.X), result.UpperLeft.X);
 		}
 
-		[Test]
+		[Fact]
 		public void JigSawPatternTest()
 		{
 			// Arrange
@@ -134,11 +132,11 @@ namespace Patternizer.Test
 			var result = evaluator.Evaluate(PathsForTesting.JigSawPath);
 
 			// Assert
-			Assert.IsTrue(result.IsValid);
-			Assert.AreEqual("test", result.Key);
+			Assert.True(result.IsValid);
+			Assert.Equal("test", result.Key);
 		}
 
-		[Test]
+		[Fact]
 		public void CrossPathTest()
 		{
 			// Arrange
@@ -150,22 +148,22 @@ namespace Patternizer.Test
 			var result = evaluator.Evaluate(path);
 
 			// Assert
-			Assert.IsTrue(result.IsValid);
+			Assert.True(result.IsValid);
 		}
 
-		[Test]
+		[Fact]
 		public void EntryTest()
 		{
 			// Arrange
 			var evaluator = new PatternEvaluator();
-			var path = Path.Parse("10,300 -> 10,270 -> 600,270 -> 600,300");
+			var path = Path.Parse("10,300 -> 10,260 -> 600,260 -> 600,300");
 
 			// Act
 			evaluator.Add("entry").When(p => p.MovesDown().MovesRight().MovesUp().Bounds(BoundsDescriptor.IsWide));
 			var result = evaluator.Evaluate(path);
 
 			// Assert
-			Assert.IsTrue(result.IsValid);
+			Assert.True(result.IsValid);
 		}
 	}
 }

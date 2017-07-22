@@ -1,14 +1,13 @@
 using System;
-using NUnit.Framework;
 using Patternizer;
+using Xunit;
 
 namespace Patternizer.Test
 {
-	[TestFixture]
 	public class PathParseTest
 	{
 
-		[Test]
+		[Fact]
 		public void ParseTest()
 		{
 			// Arrange
@@ -18,16 +17,16 @@ namespace Patternizer.Test
 			var list = Path.Parse(path);
 
 			// Assert
-			Assert.AreEqual(2, list.Count);
-			Assert.AreEqual(10.0f, list[0].P1.X);
-			Assert.AreEqual(10.0f, list[0].P1.Y);
-			Assert.AreEqual(10.0f, list[0].P2.X);
-			Assert.AreEqual(40.0f, list[0].P2.Y);
-			Assert.AreEqual(30.0f, list[1].P2.X);
-			Assert.AreEqual(40.0f, list[1].P2.Y);
+			Assert.Equal(2, list.Count);
+			Assert.Equal(10.0f, list[0].P1.X);
+			Assert.Equal(10.0f, list[0].P1.Y);
+			Assert.Equal(10.0f, list[0].P2.X);
+			Assert.Equal(40.0f, list[0].P2.Y);
+			Assert.Equal(30.0f, list[1].P2.X);
+			Assert.Equal(40.0f, list[1].P2.Y);
 		}
 
-		[Test]
+		[Fact]
 		public void ParseRowBasedTest()
 		{
 			// Arrange
@@ -37,9 +36,8 @@ namespace Patternizer.Test
 			var list = Path.Parse(path);
 
 			// Assert
-			Assert.AreEqual(2, list.Count);
-			Assert.AreEqual(331f, list[0].P1.X);
-		
+			Assert.Equal(2, list.Count);
+			Assert.Equal(331f, list[0].P1.X);
 		}
 	}
 }

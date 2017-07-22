@@ -1,12 +1,11 @@
 ﻿using System;
-using NUnit.Framework;
+using Xunit;
 
 namespace Patternizer.Test
 {
-	[TestFixture]
 	public class LineSimplifierTest
 	{
-		[Test]
+		[Fact]
 		public void BrokenLineTest()
 		{
 			// Arrange
@@ -18,8 +17,8 @@ namespace Patternizer.Test
 			var result = evaluator.Evaluate(path);
 
 			// Assert
-			Assert.IsTrue(result.IsValid);
-			Assert.AreEqual("line", result.Key);
+			Assert.True(result.IsValid);
+			Assert.Equal("line", result.Key);
 		}
 	}
 }

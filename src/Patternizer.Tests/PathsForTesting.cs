@@ -1,12 +1,10 @@
 using System;
 using System.Threading.Tasks;
-using NUnit.Framework;
 using System.Collections.Generic;
 using Patternizer;
 
 namespace Patternizer.Test
 {
-
 	internal static class PathsForTesting
 	{
 		public static List<Line> WideRectangle1
@@ -19,7 +17,6 @@ namespace Patternizer.Test
 					new Line (293, -60, 7, -67),
 					new Line (7, -67, 8, 7)
 				};
-
 			}
 		}
 
@@ -34,7 +31,6 @@ namespace Patternizer.Test
 					new Line (79, -193, 7, -193),
 					new Line (7, -193, 8, 7)
 				};
-
 			}
 		}
 
@@ -43,14 +39,9 @@ namespace Patternizer.Test
 			get {
 				// TODO This is based on y being on the lower side of the screen
 				return new List<Line> () {
-					//new Line (10, 10, 200, 9),
-					//new Line (200, 9, 193, -60),
-					//new Line (193, -60, 7, -67),
-					//new Line (7, -67, 8, 7),
 					new Line (10, 10, 200, -200),
 					new Line (200, 6, 10, -200)
 				};
-
 			}
 		}
 

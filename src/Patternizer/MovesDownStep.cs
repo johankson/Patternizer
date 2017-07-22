@@ -20,7 +20,7 @@ namespace Patternizer
 
 			var acceptedSlopeDiff = Math.Abs(dy * Settings.AcceptedSlopeRatio);
 
-			if (dy < Settings.UnitValue && Math.Abs (dx) < acceptedSlopeDiff && PopLine(lines, context)) {
+			if (dy < 0 && Math.Abs(dy) > Settings.UnitValue && Math.Abs (dx) < acceptedSlopeDiff && PopLine(lines, context)) {
 				return new StepPatternEvaluationResult (true, line.P2);
 			}
 

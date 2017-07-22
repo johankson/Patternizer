@@ -1,14 +1,12 @@
 ﻿using System;
-using NUnit.Framework;
 using Patternizer;
+using Xunit;
 
 namespace Patternizer.Test
 {
-	[TestFixture]
 	public class BasicLineTest
 	{
-
-		[Test]
+		[Fact]
 		public void LineDownTest()
 		{
 			// Arrange
@@ -20,8 +18,8 @@ namespace Patternizer.Test
 			var result = evaluator.Evaluate(path);
 
 			// Assert
-			Assert.IsTrue(result.IsValid);
-			Assert.AreEqual("linedown", result.Key);
+			Assert.True(result.IsValid);
+			Assert.Equal("linedown", result.Key);
 		}
 	}
 }

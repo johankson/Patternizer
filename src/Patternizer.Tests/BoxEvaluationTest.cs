@@ -1,13 +1,12 @@
 using System;
 using System.Collections.Generic;
-using NUnit.Framework;
+using Xunit;
 
 namespace Patternizer.Test
 {
-	[TestFixture]
 	public class BoxEvaluationTest
 	{
-		[Test]
+		[Fact]
 		public void ShadyRectangleTest1()
 		{
 			// Arrange
