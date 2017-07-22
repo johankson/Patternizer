@@ -1,5 +1,25 @@
 # Patternizer
-A great little library for resolving patterns in a list of lines using a fluid-api.
+A little library for resolving patterns in a list of lines using a fluid-api.
+
+## Why
+
+The main purpose was to recognize a user drawing a shape on a touch screen. The idea then grew more generic and it now recognizes shapes defined in a fluent way.
+
+This is one example when you want to check if the shape begins with a down movement, a longer right movement and an up movement. The BoundsDescription sets a restriction on the entire shape.
+
+```csharp
+evaluator.Add("entry").When(p => 
+	p.MovesDown()
+	 .MovesRight()
+	 .MovesUp()
+	 .Bounds(BoundsDescriptor.IsWide));
+```
+
+The library also can define repeating parts. But it's still in alpha and there will be a lot of changes going forward.
+
+## Sample app
+
+The sample app is a Xamarin Forms app that allows you to draw different shapes and it resolves it on the fly.
 
 ## Status
 
@@ -51,7 +71,7 @@ evaluator.Add("cirle").When(Pattern.Circle);
 // pass in a list of lines and get a result
 var lines = new List<Point>() = MagicFunctionThatReturnsLines();
 var result = evaluator.Evaluate(lines);
-var isButton = result.IsValid();
+var isButton = result.IsValid() && result.Key == "button";
 
 ```
 
