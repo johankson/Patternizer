@@ -50,11 +50,11 @@ namespace Patternizer.Test
 			get {
 				// TODO This is based on y being on the lower side of the screen
 				return new List<Line> () {
-					new Line (10, 10, 200, 9),
-					new Line (200, 9, 20, -50),
-					new Line (20, -50, 187, -64),
-					new Line (187, -64, 8, -63),
-					new Line (9, -63, 200, -60)
+					new Line (10, 10, 200, 9),      // Right
+					new Line (200, 9, 20, -50),     // Left & Down 
+					new Line (20, -50, 187, -64),   // Right
+					new Line (187, -64, 8, -98),    // Left & Down
+					new Line (9, -63, 200, -96)     // Right
 				};
 			}
 		}

@@ -42,6 +42,12 @@ namespace Patternizer
 			return this;
 		}
 
+        public StepPattern MovesLeftAndUp()
+        {
+            _steps.Add(new MovesLeftAndUpStep());
+            return this;
+        }
+
 		public StepPattern MovesRightAndDown()
 		{
 			_steps.Add (new MovesRightAndDownStep());

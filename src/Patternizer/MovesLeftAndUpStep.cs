@@ -5,7 +5,7 @@ using System.Linq.Expressions;
 
 namespace Patternizer
 {
-	class MovesLeftAndDownStep : Step
+	class MovesLeftAndUpStep : Step
 	{
         public override StepPatternEvaluationResult Evaluate (Point? lastStepEndPoint, List<Line> lines, StepContext context)
 		{
@@ -18,8 +18,8 @@ namespace Patternizer
 			var dx = line.P2.X - line.P1.X;
 			var dy = line.P2.Y - line.P1.Y;
 
-			if (dx < -Settings.UnitValue && 
-                dy < -Settings.UnitValue && 
+			if (dx < -Settings.UnitValue &&
+                dy > Settings.UnitValue && 
                 EvaluateStartAndEndConstraints(line, context) && 
                 PopLine(lines, context))
             {

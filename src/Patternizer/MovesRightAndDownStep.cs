@@ -13,12 +13,14 @@ namespace Patternizer
 				return new StepPatternEvaluationResult (false, null);
 			}
 
-			var line = lines.First ();
+			var line = lines.First();
 
 			var dx = line.P2.X - line.P1.X;
 			var dy = line.P2.Y - line.P1.Y;
 
-			if (dx > Settings.UnitValue && dy < Settings.UnitValue && PopLine(lines, context)) 
+			if (dx > Settings.UnitValue && 
+                dy < -Settings.UnitValue && 
+                PopLine(lines, context)) 
             {
                 return new StepPatternEvaluationResult (true, line.P2);
 			}

@@ -6,7 +6,7 @@ A little library for resolving patterns in a list of lines using a fluid-api.
 
 ## Why
 
-The main purpose was to recognize a user drawing a shape on a touch screen. The idea then grew more generic and it now recognizes shapes defined in a fluent way.
+The main purpose was to recognize when a user draws a shape on a touch screen. The idea then grew more generic and it now recognizes shapes defined in a fluent way.
 
 This is one example when you want to check if the shape begins with a down movement, a longer right movement and an up movement. The BoundsDescription sets a restriction on the entire shape.
 
