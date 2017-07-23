@@ -15,7 +15,7 @@ namespace Patternizer.Tests
             var evaluator = new PatternEvaluator();
 
             // Act
-            evaluator.Add("image").When(p => p.MovesRightAndDown().MovesLeftAndDown()).AllowInverse();
+            evaluator.Add("image").When(p => p.MovesRightAndDown().MovesLeftAndDown()).AllowInverse(InverseDescriptor.Horizontal);
             var result = evaluator.Evaluate(PathsForTesting.InverseImage);
 
             // Assert

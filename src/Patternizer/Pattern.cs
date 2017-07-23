@@ -10,8 +10,11 @@ namespace Patternizer
 	{
 		private List<PatternBase> _children = new List<PatternBase>();
         private bool _allowInverse;
+        private StepContext _originalStepContext;
+        private List<Line> _originalLines;
+        private InverseDescriptor _invertDescriptor;
 
-		public Pattern When(PatternBase pattern)
+        public Pattern When(PatternBase pattern)
 		{
 			if (pattern == null) {
 				throw new ArgumentNullException ();
@@ -29,20 +32,15 @@ namespace Patternizer
 			return this;
 		}
 
-        public Pattern AllowInverse()
+        public Pattern AllowInverse(InverseDescriptor descriptor = InverseDescriptor.Horizontal)
         {
             _allowInverse = true;
             return this;
         }
-
-        private StepContext _originalStepContext;
-        private List<Line> _originalLines;
-
+     
         public override PatternResult Evaluate(List<Line> lines, StepContext context)
 		{
 			PatternResult result = null;
-
-            bool isFirstRun = true;
 
             if(_allowInverse)
             {
@@ -64,7 +62,7 @@ namespace Patternizer
 				result = item.Evaluate (lines, context);
 				if (!result.IsValid)
                 {
-                    if(isFirstRun && _allowInverse)
+                    if(_allowInverse)
                     {
                         // restore the context
                         // TODO: Better serialization/deserialization
@@ -76,12 +74,15 @@ namespace Patternizer
                         context.HistoricalLines = _originalStepContext.HistoricalLines;
 
                         // Crude way to flip the lines horizontally
-                        foreach(var line in _originalLines)
+                        var x = _invertDescriptor == InverseDescriptor.Horizontal || _invertDescriptor == InverseDescriptor.Both ? -1 : 1;
+                        var y = _invertDescriptor == InverseDescriptor.Vertical || _invertDescriptor == InverseDescriptor.Both ? -1 : 1;
+
+                        foreach (var line in _originalLines)
                         {
                             lines.Add(
                                 new Line(
-                                    new Point(-line.P1.X, line.P1.Y),
-                                    new Point(-line.P2.X, line.P2.Y)));
+                                    new Point(line.P1.X * x, line.P1.Y * y),
+                                    new Point(line.P2.X * x, line.P2.Y * y)));
                         }
 
                         // do the inverse 
