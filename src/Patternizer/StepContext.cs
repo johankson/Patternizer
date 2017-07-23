@@ -27,7 +27,7 @@ namespace Patternizer
 			}
 		}
 
-		public List<Line> HistoricalLines { get; private set; } = new List<Line>();
+		public List<Line> HistoricalLines { get; set; } = new List<Line>();
 
 		public void PushLine(Line line)
 		{

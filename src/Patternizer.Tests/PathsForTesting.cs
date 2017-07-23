@@ -34,7 +34,7 @@ namespace Patternizer.Test
 			}
 		}
 
-		public static List<Line> ImageRectangle
+		public static List<Line> Image
 		{
 			get {
 				// TODO This is based on y being on the lower side of the screen
@@ -45,7 +45,19 @@ namespace Patternizer.Test
 			}
 		}
 
-		public static List<Line> JigSawPath
+        public static List<Line> InverseImage
+        {
+            get
+            {
+                // TODO This is based on y being on the lower side of the screen
+                return new List<Line>() {
+                    new Line (200, 6, 10, -200),
+                    new Line (10, 10, 200, -200)
+                };
+            }
+        }
+
+        public static List<Line> JigSawPath
 		{
 			get {
 				// TODO This is based on y being on the lower side of the screen

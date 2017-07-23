@@ -78,6 +78,7 @@ namespace Patternizer
 			return this;
 		}
 
+
         #region Constraints
 
         /// <summary>

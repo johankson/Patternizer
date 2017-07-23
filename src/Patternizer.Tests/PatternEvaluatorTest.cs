@@ -48,7 +48,7 @@ namespace Patternizer.Test
 			evaluator.Add("image").When(p => p.MovesRightAndDown())
 								  .When(p => p.MovesLeftAndDown());
 
-			var result = evaluator.Evaluate(PathsForTesting.ImageRectangle);
+			var result = evaluator.Evaluate(PathsForTesting.Image);
 
 			// Assert
 			Assert.True(result.IsValid);
@@ -63,7 +63,7 @@ namespace Patternizer.Test
 
 			// Act
 			evaluator.Add("button").When(Pattern.WideRectangle);
-			var result = evaluator.Evaluate(PathsForTesting.ImageRectangle);
+			var result = evaluator.Evaluate(PathsForTesting.Image);
 
 			// Assert
 			Assert.False(result.IsValid);
@@ -98,7 +98,7 @@ namespace Patternizer.Test
 				.When(p => p.MovesRightAndDown())
 				.When(p => p.MovesLeftAndDown());
 
-			var result = evaluator.Evaluate(PathsForTesting.ImageRectangle);
+			var result = evaluator.Evaluate(PathsForTesting.Image);
 
 			// Assert
 			Assert.True(result.IsValid);
