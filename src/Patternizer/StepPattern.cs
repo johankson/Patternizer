@@ -71,14 +71,6 @@ namespace Patternizer
 			return Repetitive (0, p);
 		}
 
-        // This is most likely soon replaced with Start and End
-		public StepPattern EndsOnRightSide()
-		{
-			_steps.Add (new EndsOnRightSideStep ());
-			return this;
-		}
-
-
         #region Constraints
 
         /// <summary>
@@ -139,9 +131,11 @@ namespace Patternizer
 
 			StepPatternEvaluationResult lastResult = null;
 
-			foreach (var step in _steps) {
+			foreach (var step in _steps)
+            {
 				var stepResult = step.Evaluate(lastResult?.LastPoint, lines, context);
-				if (stepResult.IsValid == false) {
+				if (stepResult.IsValid == false)
+                {
 					return new PatternResult () { IsValid = false, LastPointInPattern = stepResult.LastPoint };
 				}
 
