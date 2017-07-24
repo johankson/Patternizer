@@ -73,10 +73,10 @@ var evaluator = new PatternEvaluator();
 
 // define what you are looking for (multiple patterns are ok)
 evaluator.Add("button").When(Pattern.WideRectangle);
-evaluator.Add("cirle").When(Pattern.Circle);
+evaluator.Add("circle").When(Pattern.Circle);
 
 // pass in a list of lines and get a result
-var lines = new List<Line>() = MagicFunctionThatReturnsLines();
+var lines = MagicFunctionThatReturnsLines();
 var result = evaluator.Evaluate(lines);
 var isButton = result.IsValid() && result.Key == "button";
 
@@ -121,4 +121,17 @@ public PatternBase CreateWideRectanglePattern()
          .Bounds(BoundsDescriptor.IsWide);
   	return pattern;
 }
+```
+
+You can also define a pattern that allows inverse of all steps defined. In this pattern it doesn't matter if the drawing begins from left or right. It's essentially the same thing as flipping the input lines depending on which orientation you choose.
+
+```csharp
+public PatternBase CreateDoubleLinePattern()
+{
+    var pattern = new StepPattern();
+    pattern.When(p => p.MovesRight().MovesLeft())
+        .AllowInverse(InverseDescriptor.Horizontal);
+    return pattern;
+}
+
 ```
