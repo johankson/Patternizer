@@ -24,7 +24,7 @@ The library also can define repeating parts. But it's still in alpha and there w
 
 The sample app is a Xamarin Forms app that allows you to draw different shapes and it resolves it on the fly.
 
-![Sample app](http://imgur.com/a/RTTNH)
+![Sample app](https://www.dropbox.com/s/48sy79k49cy33a9/Patternizer.gif?dl=0&raw=1)
 
 ## Nuget
 
