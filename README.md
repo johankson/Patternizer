@@ -24,6 +24,8 @@ The library also can define repeating parts. But it's still in alpha and there w
 
 The sample app is a Xamarin Forms app that allows you to draw different shapes and it resolves it on the fly.
 
+![Sample app](http://imgur.com/a/RTTNH)
+
 ## Nuget
 
 https://www.nuget.org/packages/patternizer
@@ -35,8 +37,6 @@ Still in alpha. The basic concept is covered but it needs work.
 1. You prep a PatternEvaluator instance with one or more patterns to recognize
 2. You pass a list of lines to the PatternEvaluator
 3. It tells you if you have a match and what pattern it matches
-
-Nuget-package and a complete sample app is coming as soon as possible.
 
 I'm also refactoring a bunch of code to make it more like a framework so be prepared for stuff to change.
 
