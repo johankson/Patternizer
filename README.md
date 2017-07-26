@@ -135,3 +135,31 @@ public PatternBase CreateDoubleLinePattern()
 }
 
 ```
+
+One of the more experimental features is the possibility to AllowAnyOrder on a pattern. The code below demonstrates this.
+
+The input path is a triangle. Essentially the same triangle but the two different paths starts at different points. Without this feature you would have to define three separate patterns to satisfy all the ways this triangle can be drawn.
+
+But instead, just add ```AllowAnyOrder()``` to the pattern and the library will reorder lines and try any possible combination.
+
+One drawback is that it doesn't work at in conjunction with ```AllowInverse()```. It's on the TODO-list.
+
+```csharp
+// Arrange
+var evaluator = new PatternEvaluator();
+var path1 = Path.Parse("300,300 -> 400,200 -> 200,200 -> 300,300"); // the same triangle, just drawn in different order
+var path2 = Path.Parse("400,200 -> 200,200 -> 300,300 -> 400,200");
+
+// Act
+evaluator.Add("wildcard-triange").When(
+    p => p.MovesRightAndDown()
+    .MovesLeft()
+    .MovesRightAndUp()
+    .End(RelativePosition.NearStart)).AllowAnyOrder();
+var result1 = evaluator.Evaluate(path1);
+var result2 = evaluator.Evaluate(path2);
+
+// Assert
+Assert.True(result1.IsValid);
+Assert.True(result2.IsValid);
+```
