@@ -20,7 +20,6 @@ namespace Patternizer
 
 			if (dx < -Settings.UnitValue &&
                 dy > Settings.UnitValue && 
-                EvaluateStartAndEndConstraints(line, context) && 
                 PopLine(lines, context))
             {
 				return new StepPatternEvaluationResult (true, line.P2);

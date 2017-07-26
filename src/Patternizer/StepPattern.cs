@@ -93,8 +93,8 @@ namespace Patternizer
         /// <summary>
         /// Adds a start constraint to the last step registered.
         /// </summary>
-        /// <param name="relativeStartPosition">Relative start position.</param>
-        public StepPattern End(RelativePosition relativeStartPosition)
+        /// <param name="relativeEndPosition">Relative en dposition.</param>
+        public StepPattern End(RelativePosition relativeEndPosition)
         {
             if (_steps.Count == 0)
             {
@@ -102,7 +102,7 @@ namespace Patternizer
             }
 
             var lastStep = _steps.Last();
-            lastStep.RelativeEndConstraint = relativeStartPosition;
+            lastStep.RelativeEndConstraint = relativeEndPosition;
 
             return this;
         }

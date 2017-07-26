@@ -30,7 +30,9 @@ namespace Patternizer
 
 		AboveBottom = 512,
 		NearBottom = 1024,
-		BelowBottom = 2048
+		BelowBottom = 2048,
+
+        NearStart = 4096
     }
 
 	[Flags]
