@@ -5,14 +5,21 @@ using System.Linq.Expressions;
 
 namespace Patternizer
 {
-
 	public class Pattern : PatternBase 
 	{
 		private List<PatternBase> _children = new List<PatternBase>();
-        private bool _allowInverse;
+
+        // Context related
         private StepContext _originalStepContext;
         private List<Line> _originalLines;
+
+        // Inverse related
+        private bool _allowInverse;
         private InverseDescriptor _invertDescriptor;
+
+        // Any order related
+        private bool _allowAnyOrder;
+        private int _allowAnyOrderStepsLeft;
 
         public Pattern When(PatternBase pattern)
 		{
@@ -32,9 +39,16 @@ namespace Patternizer
 			return this;
 		}
 
+        public Pattern AllowAnyOrder()
+        {
+            _allowAnyOrder = true;
+            return this;
+        }
+
         public Pattern AllowInverse(InverseDescriptor descriptor = InverseDescriptor.Horizontal)
         {
             _allowInverse = true;
+            _invertDescriptor = descriptor;
             return this;
         }
      
@@ -44,59 +58,123 @@ namespace Patternizer
 
             if(_allowInverse)
             {
-                // TODO: Better serialization/deserialization
-                _originalStepContext = new StepContext()
-                {
-                    Bottom = context.Bottom,
-                    Left = context.Left,
-                    Top = context.Top,
-                    Right = context.Right,
-                    HistoricalLines = context.HistoricalLines.ToList()
-                };
-
-                _originalLines = lines.ToList();
+                StoreContext(context, lines);
             }
 
-			foreach (var item in _children) 
+            if(_allowAnyOrder)
+            {
+                _allowAnyOrderStepsLeft = lines.Count - 1;
+                StoreContext(context, lines);
+            }
+
+            foreach (var item in _children) 
             {
 				result = item.Evaluate (lines, context);
 				if (!result.IsValid)
                 {
                     if(_allowInverse)
                     {
+                        // REMARK: This is just concept code and subject to change
+
                         // restore the context
-                        // TODO: Better serialization/deserialization
-                        lines.Clear();
-                        context.Left = _originalStepContext.Left;
-                        context.Right = _originalStepContext.Right;
-                        context.Top = _originalStepContext.Top;
-                        context.Bottom = _originalStepContext.Bottom;
-                        context.HistoricalLines = _originalStepContext.HistoricalLines;
+                        RestoreOriginalContext(context, lines);
 
-                        // Crude way to flip the lines horizontally
-                        var x = _invertDescriptor == InverseDescriptor.Horizontal || _invertDescriptor == InverseDescriptor.Both ? -1 : 1;
-                        var y = _invertDescriptor == InverseDescriptor.Vertical || _invertDescriptor == InverseDescriptor.Both ? -1 : 1;
-
-                        foreach (var line in _originalLines)
-                        {
-                            lines.Add(
-                                new Line(
-                                    new Point(line.P1.X * x, line.P1.Y * y),
-                                    new Point(line.P2.X * x, line.P2.Y * y)));
-                        }
+                        // Crude way to flip the lines
+                        InverseLines(lines);
 
                         // do the inverse 
                         _allowInverse = false;
                         return Evaluate(lines, context);
                     }
-					return result;
+
+                    if(_allowAnyOrder)
+                    {
+                        // REMARK: This is just concept code and subject to change.
+                        // This implementation has the following issues:
+                        //
+                        // 1)   It looks ugly
+                        // 2)   It will reorder lines that are possibly outside the scope of this
+                        //      pattern. That can be calculated (not easily for Repeat-patterns though)
+                        //      at best. Perhaps through a Pattern.NumberOfLinesNeeded() property?
+
+                        while(_allowAnyOrderStepsLeft > 0)
+                        {
+                            // Restore the context
+                            RestoreOriginalContext(context, lines);
+
+                            // ReorderLines
+                            ReorderLines(lines);
+                            _originalLines = lines.ToList();
+
+                            // Evaluate
+                            result = item.Evaluate(lines, context);
+                            if(result.IsValid)
+                            {
+                                return result;
+                            }
+
+                            _allowAnyOrderStepsLeft--;
+                        }
+                    }
+
+                    return result;
 				}
 			}
 
 			return result;
 		}
 
-		public static PatternBase WideRectangle
+        private void ReorderLines(List<Line> lines)
+        {
+            var first = lines.First();
+            lines.Remove(first);
+            lines.Add(first);
+        }
+
+        private void InverseLines(List<Line> lines)
+        {
+            var copy = lines.ToList();
+            lines.Clear();
+            var x = _invertDescriptor == InverseDescriptor.Horizontal || _invertDescriptor == InverseDescriptor.Both ? -1 : 1;
+            var y = _invertDescriptor == InverseDescriptor.Vertical || _invertDescriptor == InverseDescriptor.Both ? -1 : 1;
+
+            foreach (var line in copy)
+            {
+                lines.Add(
+                    new Line(
+                        new Point(line.P1.X * x, line.P1.Y * y),
+                        new Point(line.P2.X * x, line.P2.Y * y)));
+            }
+        }
+
+        private void StoreContext(StepContext context, List<Line> lines)
+        {
+            _originalStepContext = new StepContext()
+            {
+                Bottom = context.Bottom,
+                Left = context.Left,
+                Top = context.Top,
+                Right = context.Right,
+                HistoricalLines = context.HistoricalLines.ToList()
+            };
+
+            _originalLines = lines.ToList();
+        }
+
+        private void RestoreOriginalContext(StepContext context, List<Line> lines)
+        {
+            lines.Clear();
+            lines.AddRange(_originalLines);
+            context.Left = _originalStepContext.Left;
+            context.Right = _originalStepContext.Right;
+            context.Top = _originalStepContext.Top;
+            context.Bottom = _originalStepContext.Bottom;
+            context.HistoricalLines = _originalStepContext.HistoricalLines;
+        }
+
+        #region Predefined Patterns
+
+        public static PatternBase WideRectangle
 		{
 			get 
             { 
@@ -124,5 +202,7 @@ namespace Patternizer
                 return pattern;
             }
         }
-	}
+
+        #endregion
+    }
 }

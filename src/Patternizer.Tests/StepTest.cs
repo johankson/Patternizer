@@ -53,5 +53,35 @@ namespace Patternizer.Tests
             // Assert
             Assert.True(result.IsValid);
         }
+
+        [Fact]
+        public void Step_EndsNearStart_Test()
+        {
+            // Arrange
+            var evaluator = new PatternEvaluator();
+            var path = Path.Parse("200,200 -> 50,200 -> 197, 200");
+
+            // Act
+            evaluator.Add("p").When(e => e.MovesLeft().MovesRight().End(RelativePosition.NearStart));
+            var result = evaluator.Evaluate(path);
+
+            // Assert
+            Assert.True(result.IsValid);
+        }
+
+        [Fact]
+        public void Step_NotEndsNearStart_Test()
+        {
+            // Arrange
+            var evaluator = new PatternEvaluator();
+            var path = Path.Parse("200,200 -> 50,200 -> 197, 290");
+
+            // Act
+            evaluator.Add("p").When(e => e.MovesLeft().MovesRight().End(RelativePosition.NearStart));
+            var result = evaluator.Evaluate(path);
+
+            // Assert
+            Assert.False(result.IsValid);
+        }
     }
 }

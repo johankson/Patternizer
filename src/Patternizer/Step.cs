@@ -4,9 +4,10 @@ using System.Collections.Generic;
 
 namespace Patternizer
 {
-	abstract class Step
+	internal abstract class Step
 	{
         public RelativePosition RelativeStartConstraint { get; set; } = RelativePosition.Anywhere;
+
         public RelativePosition RelativeEndConstraint { get; set; } = RelativePosition.Anywhere;
 
 		public BoundsDescriptor BoundsConstraint { get; set; } = BoundsDescriptor.Undefined;
@@ -28,6 +29,13 @@ namespace Patternizer
         public bool PopLine(List<Line> lines, StepContext context)
         {
             var line = lines.First();
+
+            // Evaluate
+            if(!EvaluateStartAndEndConstraints(line, context))
+            {
+                return false;
+            }
+            
 			context.PushLine(line);
             lines.RemoveAt(0);
 
@@ -35,7 +43,7 @@ namespace Patternizer
 			return EvaluateBoundsConstraint(context);
         }
 
-		public bool EvaluateStartAndEndConstraints(Line line, StepContext context)
+		private bool EvaluateStartAndEndConstraints(Line line, StepContext context)
 		{
 			if (RelativeStartConstraint == RelativePosition.Anywhere && RelativeEndConstraint == RelativePosition.Anywhere)
 			{
@@ -57,19 +65,17 @@ namespace Patternizer
 			return true;
 		}
 
-		public bool EvaluateBoundsConstraint(StepContext context)
+		private bool EvaluateBoundsConstraint(StepContext context)
 		{
 			if (BoundsConstraint == 0)
 			{
 				return true;
-
 			}
 
 			return EvaluateBounds(BoundsConstraint, context);
-				
 		}
 
-		static bool EvaluateBounds(BoundsDescriptor flags, StepContext context)
+		private bool EvaluateBounds(BoundsDescriptor flags, StepContext context)
 		{
 			// Concept code, this should be checked for invalid combinations
 			if (flags.HasFlag(BoundsDescriptor.IsWide) && context.Width < context.Height * Settings.WideCutoffValue)
@@ -85,7 +91,7 @@ namespace Patternizer
 			return true;
  		}
 
-		bool Evaluate(RelativePosition flags, Point p, StepContext context)
+		private bool Evaluate(RelativePosition flags, Point p, StepContext context)
 		{
 			if (flags.HasFlag(RelativePosition.AboveBottom))
 				throw new NotImplementedException();
@@ -124,27 +130,45 @@ namespace Patternizer
 				return false;
 			}
 
+            if( flags.HasFlag(RelativePosition.NearStart) && !IsNearStart(p, context))
+            {
+                return false;
+            }
+
 			return true;
-		}
-			
-		bool IsNearTop(Point p, StepContext context)
+		} 
+
+        private bool IsNearTop(Point p, StepContext context)
 		{
 			return Math.Abs(context.Top - p.Y) <= (Settings.UnitValue * Settings.NearUnitValue);
 		}
 
-		bool IsNearBottom(Point p, StepContext context)
+		private bool IsNearBottom(Point p, StepContext context)
 		{
 			return Math.Abs(context.Bottom - p.Y) <= (Settings.UnitValue * Settings.NearUnitValue);
 		}
 
-		bool IsNearLeft(Point p, StepContext context)
+		private bool IsNearLeft(Point p, StepContext context)
 		{
 			return Math.Abs(context.Left - p.X) <= (Settings.UnitValue * Settings.NearUnitValue);
 		}
 
-		bool IsNearRight(Point p, StepContext context)
+		private bool IsNearRight(Point p, StepContext context)
 		{
 			return Math.Abs(context.Right - p.X) <= (Settings.UnitValue * Settings.NearUnitValue);
 		}
-	}
+
+        private bool IsNearStart(Point p, StepContext context)
+        {
+            if (!context.HistoricalLines.Any())
+            {
+                throw new Exception("There must be at least one line to determine if we are near start");
+            }
+
+            var firstPoint = context.HistoricalLines.First().P1;
+            var delta = p - firstPoint;
+
+            return delta.Magnitude <= (Settings.UnitValue * Settings.NearUnitValue);
+        }
+    }
 }
