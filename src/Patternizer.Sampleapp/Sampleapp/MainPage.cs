@@ -7,6 +7,7 @@ namespace Sampleapp
 {
 	public class MyCocosSharpView : CocosSharpView 
 	{
+        // This is to make sure the correct renderer is loaded at runtime
 	}
 
 	public class MainPage : ContentPage

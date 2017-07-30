@@ -199,7 +199,10 @@ namespace Patternizer
                        .Start(RelativePosition.NearTop | RelativePosition.NearRightSide)
                        .End(RelativePosition.NearBottom | RelativePosition.NearLeftSide);
 
-                return pattern;
+                var wrapper = new Pattern();
+                wrapper.AllowAnyOrder();
+                wrapper.When(pattern);
+                return wrapper;
             }
         }
 
