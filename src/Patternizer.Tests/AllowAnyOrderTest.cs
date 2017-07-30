@@ -8,7 +8,7 @@ namespace Patternizer.Tests
     public class WildCardTest
     {
         [Fact]
-        public void TriangleWildcardTest()
+        public void AllowAnyOrderTest()
         {
             // Arrange
             var evaluator = new PatternEvaluator();
@@ -16,7 +16,7 @@ namespace Patternizer.Tests
             var path2 = Path.Parse("400,200 -> 200,200 -> 300,300 -> 400,200");
 
             // Act
-            evaluator.Add("wildcard-triange").When(
+            evaluator.Add("allowanyorder-triangle").When(
                 p => p.MovesRightAndDown()
                 .MovesLeft()
                 .MovesRightAndUp()
