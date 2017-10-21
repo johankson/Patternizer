@@ -1,6 +1,7 @@
 using System;
 using System.Linq;
 using System.Collections.Generic;
+using System.Diagnostics;
 
 namespace Patternizer
 {
@@ -33,6 +34,7 @@ namespace Patternizer
             // Evaluate
             if(!EvaluateStartAndEndConstraints(line, context))
             {
+                Debug.WriteLine("Start or End Constraint validation was negative");
                 return false;
             }
             
@@ -80,11 +82,13 @@ namespace Patternizer
 			// Concept code, this should be checked for invalid combinations
 			if (flags.HasFlag(BoundsDescriptor.IsWide) && context.Width < context.Height * Settings.WideCutoffValue)
 			{
+                Debug.WriteLine($"Evaluation failed: Bounds was set to IsWide but the shape isn't wide. Width={context.Width}, Height={context.Height}, WideCutoffValue value={Settings.WideCutoffValue}");
 				return false;
 			}
 
 			if (flags.HasFlag(BoundsDescriptor.IsTall) && context.Height < context.Width * Settings.TallCutoffValue)
 			{
+                // TODO Add debug output
 				return false;
 			}
 
@@ -108,7 +112,7 @@ namespace Patternizer
 			if (flags.HasFlag(RelativePosition.OnTheLeftOf))
 				throw new NotImplementedException();
 			if (flags.HasFlag(RelativePosition.OnTheRightOf))
-				throw new NotImplementedException();
+                throw new NotImplementedException();
 
 			if (flags.HasFlag(RelativePosition.NearTop) && !IsNearTop(p, context))
 			{

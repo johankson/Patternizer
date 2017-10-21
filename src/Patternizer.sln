@@ -8,7 +8,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sampleapp", "Patternizer.Sa
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sampleapp.iOS", "Patternizer.Sampleapp\Sampleapp.iOS\Sampleapp.iOS.csproj", "{79429AB2-7CF0-4AC2-BF00-D811EE0812BE}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Patternizer", "Patternizer\Patternizer.csproj", "{92BD6A21-B5BE-47DA-AA93-D02B8ADC664A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Patternizer", "Patternizer\Patternizer.csproj", "{92BD6A21-B5BE-47DA-AA93-D02B8ADC664A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Patternizer.Tests", "Patternizer.Tests\Patternizer.Tests.csproj", "{63DA2770-5429-4079-8417-8A22F4206E00}"
 EndProject

@@ -54,6 +54,14 @@ namespace Patternizer
 			_processedPoints.Clear();
 		}
 
+        public void RegisterPoints(IEnumerable<Point> points)
+        {
+            foreach (var point in points)
+            {
+                RegisterPoint(point);
+            }
+        }
+
 		public void RegisterPoint(float x, float y)
 		{
 			RegisterPoint(new Point() { X = x, Y = y });

@@ -38,7 +38,7 @@ namespace Patternizer
 		/// wide.
 		/// </remarks>
 		/// <value>The wide cutoff value.</value>
-		public static float WideCutoffValue { get; set; } = 2f;
+		public static float WideCutoffValue { get; set; } = 1.5f;
 
 		/// <summary>
 		/// Determines the ratio of how much taller a shape has to be in contrast
@@ -50,7 +50,7 @@ namespace Patternizer
 		/// tall.
 		/// </remarks>
 		/// <value>The wide cutoff value.</value>
-		public static float TallCutoffValue { get; set; } = 2f;
+		public static float TallCutoffValue { get; set; } = 1.5f;
 
 		/// <summary>
 		/// The number of times the list of lines should be simplified when
