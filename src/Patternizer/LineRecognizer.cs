@@ -72,7 +72,7 @@ namespace Patternizer
 			_pointLog.Add(point);
 			_points.Add(point);
 
-			if (_points.Count < 3)
+			if (_points.Count < 2)
 			{
 				return;
 			}
@@ -82,7 +82,7 @@ namespace Patternizer
 
 			Debug.WriteLine("currentAverageAngle: {0}", currentAverageAngle);
 
-			if (_processedPoints.Count > 5)
+			if (_processedPoints.Count > 1)
 			{
 
 				var processedAverageAngle = AverageAngleInList(_processedPoints);
@@ -112,13 +112,13 @@ namespace Patternizer
 
 					if (cutoffIndex == -1)
 					{
+                        Debug.WriteLine("cutoffindex=-1");
 						_processedPoints.AddRange(_points);
 						_points.Clear();
-						_processedPoints.Add(lastPoint);
-
 					}
 					else
 					{
+                        Debug.WriteLine($"cutoffindex={cutoffIndex}"); 
 						_processedPoints.AddRange(_points.GetRange(0, cutoffIndex + 1));
 						_points.RemoveRange(0, cutoffIndex + 1);
 					}
