@@ -128,8 +128,8 @@ namespace Sampleapp
 						_canvasNode.DrawSolidCircle(_lastKnownPoint, 5, CCColor4B.Green);
 					}
 
+                    _lineRecognizer.RegisterPoint(_lastKnownPoint.X, _lastKnownPoint.Y);
 					_lastKnownPoint = touch.Location;
-					_lineRecognizer.RegisterPoint(_lastKnownPoint.X, _lastKnownPoint.Y);
 				}
 			}
 			else if (touches.Count > 1 && _trackedShape != null)

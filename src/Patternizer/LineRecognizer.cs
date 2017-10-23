@@ -69,6 +69,7 @@ namespace Patternizer
 
 		public void RegisterPoint(Point point)
 		{
+            Debug.WriteLine($"{point.X}, {point.Y}");
 			_pointLog.Add(point);
 			_points.Add(point);
 
