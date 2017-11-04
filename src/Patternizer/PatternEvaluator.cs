@@ -53,12 +53,12 @@ namespace Patternizer
 							UpperLeft = new Point()
 							{
 								X = Math.Min(lines.Min(e => e.P1.X), lines.Min(e => e.P2.X)),
-								Y = Math.Min(lines.Min(e => e.P1.Y), lines.Min(e => e.P2.Y))
+								Y = Math.Max(lines.Min(e => e.P1.Y), lines.Min(e => e.P2.Y))
 							},
 							LowerRight = new Point()
 							{
 								X = Math.Max(lines.Max(e => e.P1.X), lines.Max(e => e.P2.X)),
-								Y = Math.Max(lines.Max(e => e.P1.Y), lines.Max(e => e.P2.Y))
+								Y = Math.Min(lines.Max(e => e.P1.Y), lines.Max(e => e.P2.Y))
 							}
 
 						};
